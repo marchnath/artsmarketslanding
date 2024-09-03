@@ -1,4 +1,5 @@
 import { Work_Sans } from "next/font/google";
+import { ReactNode } from 'react';
 import "./globals.css";
 import React from "react";
 import Header from "@/app/header";
@@ -13,8 +14,11 @@ export const metadata = {
   title: "artsmrkt",
   description: "artsmrkt",
 };
+interface RootLayoutProps {
+    children: ReactNode;
+}
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
       <html lang="en">
       <body className={work_sans.className}>
