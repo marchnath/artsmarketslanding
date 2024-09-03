@@ -5,6 +5,7 @@ import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
 import { useState } from "react";
 import { validateName, validateEmail, validatePhone } from "./utils/validators";
+import {addContactWithBook, checkEmailExists, checkPhoneExists} from "../lib/supabaseClient";
 
 
 const Form = ({ setFormSubmitted, setIsActive }) => {
@@ -68,19 +69,19 @@ const Form = ({ setFormSubmitted, setIsActive }) => {
         if (!nameError && !emailError && !phoneError && checkboxChecked) {
             try {
 
-                // const emailExists = await checkEmailExists(inputValueEmail);
-                // if (emailExists) {
-                //     setEmailError("This email is already in use.");
-                //     return;
-                // }
+                const emailExists = await checkEmailExists(inputValueEmail);
+                if (emailExists) {
+                    setEmailError("This email is already in use.");
+                    return;
+                }
 
-                // const phoneExists = await checkPhoneExists(inputValuePhone);
-                // if (phoneExists) {
-                //     setPhoneError("This phone number is already in use.");
-                //     return;
-                // }
+                const phoneExists = await checkPhoneExists(inputValuePhone);
+                if (phoneExists) {
+                    setPhoneError("This phone number is already in use.");
+                    return;
+                }
 
-                // await addContactWithLanguage(inputValueName, inputValueEmail, inputValuePhone, inputValueLanguage);
+                await addContactWithBook(inputValueName, inputValueEmail, inputValuePhone);
                 setInputValueName('');
                 setInputValueEmail('');
                 setInputValuePhone('');
