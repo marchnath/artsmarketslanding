@@ -2,6 +2,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import PhoneInput from "react-phone-number-input";
+import 'react-phone-number-input/style.css';
 import { useState } from "react";
 import { validateName, validateEmail, validatePhone } from "./utils/validators";
 
@@ -13,21 +14,13 @@ const Form = ({ setFormSubmitted, setIsActive }) => {
     const [nameError, setNameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [phoneError, setPhoneError] = useState('');
-    const [inputValueLanguage, setInputValueLanguage] = useState('Eng');
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [languageError, setLanguageError] = useState("");
+    const [checkboxChecked, setCheckboxChecked] = useState(false);
+    const [checkboxError, setCheckboxError] = useState('');
 
     const handleChange = (eventOrValue, name) => {
         if (name === 'telephone') {
             setInputValuePhone(eventOrValue);
             setPhoneError(validatePhone(eventOrValue));
-            return;
-        }
-
-        if (typeof eventOrValue === 'string') {
-            setInputValueLanguage(eventOrValue);
-            setLanguageError(validateLanguage(eventOrValue));
-            setIsDropdownOpen(false);
             return;
         }
 
@@ -44,6 +37,11 @@ const Form = ({ setFormSubmitted, setIsActive }) => {
             default:
                 break;
         }
+    };
+
+    const handleCheckboxChange = () => {
+        setCheckboxChecked(!checkboxChecked);
+        setCheckboxError('');
     };
 
     const handleClickClear = (field) => {
@@ -67,7 +65,7 @@ const Form = ({ setFormSubmitted, setIsActive }) => {
         setEmailError(validateEmail(inputValueEmail));
         setPhoneError(validatePhone(inputValuePhone));
 
-        if (!nameError && !emailError && !phoneError && !languageError) {
+        if (!nameError && !emailError && !phoneError && checkboxChecked) {
             try {
 
                 // const emailExists = await checkEmailExists(inputValueEmail);
@@ -86,16 +84,17 @@ const Form = ({ setFormSubmitted, setIsActive }) => {
                 setInputValueName('');
                 setInputValueEmail('');
                 setInputValuePhone('');
-                setInputValueLanguage('');
                 setNameError('');
                 setEmailError('');
                 setPhoneError('');
-                setLanguageError('');
+                setCheckboxChecked(false);
                 setIsActive(false);
                 setFormSubmitted(true);
             } catch (error) {
                 console.error("Error adding contact:", error);
             }
+        } else if (!checkboxChecked) {
+            setCheckboxError("You must agree to the processing of personal data.");
         }
     };
 
@@ -187,7 +186,7 @@ const Form = ({ setFormSubmitted, setIsActive }) => {
         </div>
         <div className="flex flex-col gap-1 py-6">
             <div className="items-top flex space-x-2 items-center ">
-                <Checkbox id="terms1" />
+                <Checkbox id="terms1" checked={checkboxChecked} onCheckedChange={handleCheckboxChange}/>
                 <div className="grid gap-1.5 leading-none">
                     <label
                         htmlFor="terms1"
@@ -197,6 +196,7 @@ const Form = ({ setFormSubmitted, setIsActive }) => {
                     </label>
                 </div>
             </div>
+            <p className="text-[14px] leading-[16.8px] text-customOrange h-[16.8px]">{checkboxError}</p>
         </div>
 
 
@@ -205,7 +205,7 @@ const Form = ({ setFormSubmitted, setIsActive }) => {
             className="flex cursor-pointer items-center gap-2 justify-center rounded-[44px] bg-customOrangeTwo px-[44px] py-3 transition-colors duration-300 ease-in-out hover:bg-customOrange active:bg-customOrangeThree"
         >
                             <span className="text-[20px] font-semibold leading-[24px] text-white">
-                                Get a call
+                               Get the book
                             </span>
             <Image src="/arrowWhite.svg" alt="arrow" width={34} height={3}/>
         </button>
