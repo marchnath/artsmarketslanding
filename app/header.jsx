@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const Header = () => {
+const Header = ({handleClickButton}) => {
 
 
     return (
@@ -48,15 +48,15 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="flex flex-row">
-                    <p className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Trading strategy</p>
-                    <p className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Who needs the strategy</p>
-                    <p className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Book</p>
-                    <p className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Reasons of failure</p>
-                    <p className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Authors</p>
+                    <Link href="#tradingStrategy" name="tradingStrategy" onClick={handleClickButton}  className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Trading strategy</Link>
+                    <Link href="#strategy" name="strategy" onClick={handleClickButton} className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Who needs the strategy</Link>
+                    <Link href="#book" name="book" onClick={handleClickButton} className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Book</Link>
+                    <Link href="#reasonsFailure" name="reasonsFailure" onClick={handleClickButton} className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Reasons of failure</Link>
+                    <Link href="#authors" name="authors"  onClick={handleClickButton} className="text-[16px] leading-[19.2px] py-2 px-4 cursor-pointer hover:text-customRedText rounded-[44px] active:bg-customOrangeFour">Authors</Link>
                 </div>
 
 
-                <Link href="/">
+                <Link href="#bookGet" name="bookGet" onClick={handleClickButton}>
                     <button type="button"
                             className="whitespace-nowrap flex  cursor-pointer items-center justify-center rounded-[44px] bg-customBlueFon px-8 py-2 hover:bg-customBlue active:bg-customBlueTwo">
                         <span className="text-[14px] leading-[16.8px] font-semibold text-white">Get the book</span>

@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-const Strategy = () => {
+const Strategy = ({ref}) => {
     return (
-        <section className="relative">
+        <section className="relative" ref={ref} id="strategy">
             <div className="max-w-screen-xl mx-auto pt-16 pb-8">
                 <div className="flex flex-col relative gap-8">
                     <h2 className="text-[44px] font-medium leading-[52.8px] text-customBlackOne">Who needs the

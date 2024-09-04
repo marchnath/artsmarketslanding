@@ -109,7 +109,7 @@ const Form = ({setFormSubmitted, setIsActive, formSubmitted, isActive}) => {
                     <p className="text-center text-[16px] leading-[19.2px] text-customBlackOne pt-4 pb-6">We have already
                         sent the book to your email address!
                         You can also open a free demo account and and start trading right now!</p>
-                    <Link href="/login" className="relative z-20 flex-1">
+                    <Link href="/" className="relative z-20 flex-1">
                         <button
                             type="button"
                             className="flex cursor-pointer flex-row items-center justify-center rounded-[44px] border-[1px] border-customGrey bg-white px-11 py-3 transition-colors duration-300 ease-in-out hover:bg-customGreyTwo active:bg-customGrey"
@@ -200,14 +200,14 @@ const Form = ({setFormSubmitted, setIsActive, formSubmitted, isActive}) => {
                                 id="telephone"
                                 value={inputValuePhone}
                                 onChange={(value) => handleChange(value, 'telephone')}
-                                className="w-full  text-[16px] leading-[19.2px] text-customBlue placeholder-customGreyThirteen outline-none"
+                                className="w-full text-[16px] leading-[19.2px] text-customBlue placeholder-customGreyThirteen outline-none"
                                 inputClass="w-full py-3 px-2 bg-transparent border-none outline-none"
                             />
                         </div>
                         <p className="text-[14px] leading-[16.8px] text-customOrange h-[16.8px]">{phoneError}</p>
                     </div>
-                    <div className="flex flex-col gap-1 py-3">
-                        <div className="items-top flex space-x-2 items-center ">
+                    <div className="flex flex-col gap-1 py-3 max-sm:pt-2 max-sm:pb-0">
+                        <div className="items-top flex space-x-2 items-center max-sm:items-start">
                             <Checkbox id="terms1" checked={checkboxChecked} onCheckedChange={handleCheckboxChange}/>
                             <div className="grid gap-1.5 leading-none">
                                 <label
@@ -228,7 +228,7 @@ const Form = ({setFormSubmitted, setIsActive, formSubmitted, isActive}) => {
                 type="submit"
                 className={`${isActive ? 'bg-customOrangeFour' : 'bg-customOrangeTwo transition-colors duration-300 ease-in-out hover:bg-customOrange active:bg-customOrangeThree'} flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
             >
-                <span className="text-[20px] font-semibold leading-[24px] text-white">
+                <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px]">
                    Get the book
                 </span>
                 <Image src="/arrowWhite.svg" alt="arrow" width={34} height={3}/>
