@@ -36,6 +36,19 @@
 .box-shadow-icon {
     box-shadow: 1px 2px 4px 0 #3b404bb5;
 }
+
+.bg-gradient {
+  background: radial-gradient(47.68% 50% at 20% 100%, rgba(209, 48, 19, 0.4) 0%, rgba(255, 233, 204, 0.4) 43.84%, rgba(250, 250, 251, 0) 100%);
+}
+
+.bg-custom-gradient-three {
+  background: linear-gradient(351.55deg, #FE9874 -14.89%, #FFE9CC 40.09%, #FFEED6 49.97%, #FFFFFF 89.06%);
+}
+
+.box-shadow-two {
+  box-shadow: 0px 4px 41px 0px #EEEEEE;
+}
+
 .PhoneInputCountry {
   padding: 14px 8px;
   border-radius: 8px;

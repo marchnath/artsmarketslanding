@@ -9,7 +9,7 @@ export const validateName = (name) => {
     } else if (name.length > 50) {
         return 'The name must contain no more than 50 characters.';
     } else if (!namePattern.test(name)) {
-        return 'Name can only contain letters, spaces, dashes, and apostrophes';
+        return 'Only letters, spaces, dashes and apostrophes.';
     } else {
         return '';
     }
