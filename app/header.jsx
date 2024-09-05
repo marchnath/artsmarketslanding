@@ -6,7 +6,7 @@ const Header = ({handleClickButton}) => {
 
 
     return (
-        <header>
+        <header className="min-w-80">
             <div className="mx-auto flex max-h-[83px] max-w-[1240px] flex-row items-center justify-between py-6">
                 <div className="flex flex-row items-center gap-4">
                     <Link

@@ -11,8 +11,8 @@ import Header from "@/app/header";
 
 
 export default function Home() {
-    const [isActive, setIsActive] = useState(false);
-    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [isActive, setIsActive] = useState(!false);
+    const [formSubmitted, setFormSubmitted] = useState(!false);
 
     const refs = {
         tradingStrategy: useRef<HTMLDivElement>(null),
@@ -35,7 +35,7 @@ export default function Home() {
     return (
         <>
         {/*<Header handleClickButton={handleClickButton}/>*/}
-        <main>
+        <main className="min-w-80">
             {/*<TradingStrategy ref={refs.tradingStrategy} isActive={isActive} formSubmitted={formSubmitted} setFormSubmitted={setFormSubmitted}*/}
             {/*         setIsActive={setIsActive}/>*/}
             {/*<Strategy ref={refs.strategy}/>*/}

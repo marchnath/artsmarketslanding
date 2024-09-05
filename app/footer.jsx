@@ -6,7 +6,7 @@ import { useState } from "react";
 const Footer = () => {
   const [hoveredIcon, setHoveredIcon] = useState(null);
   return (
-    <footer className="bg-custom-gradient-two">
+    <footer className="bg-custom-gradient-two min-w-80">
       <div className="mx-auto max-w-[1240px] pb-[91px] pt-[100px] max-sm:pt-14 max-sm:pb-8 max-sm:px-4  max-sm:min-w-xs">
         <div className="mb-16 flex flex-row gap-2.5 max-sm:mb-6">
             <Image

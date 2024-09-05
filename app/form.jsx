@@ -100,7 +100,7 @@ const Form = ({setFormSubmitted, setIsActive, formSubmitted, isActive}) => {
     return (
         <form className="flex flex-col gap-2 relative z-20" name="form-call" onSubmit={handleSubmit}>
             {formSubmitted && (
-                <div className="flex flex-col py-[35px] px-[61.5px] mx-auto items-center box-shadow-two rounded-2xl mb-7 relative z-20 bg-white">
+                <div className="flex flex-col py-[35px] px-[61.5px] mx-auto items-center box-shadow-two rounded-2xl mb-7 relative max-sm:bg-transparent max-sm:border-0 max-sm:shadow-none max-sm:py-8 max-sm:px-[18px] max-[358px]:px-[0px]">
                     <div
                         className="flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-[100px] bg-customGreenOne">
                         <Image src="arrow7.svg" alt="call" width={18} height={15}
@@ -114,7 +114,7 @@ const Form = ({setFormSubmitted, setIsActive, formSubmitted, isActive}) => {
                             type="button"
                             className="flex cursor-pointer flex-row items-center justify-center rounded-[44px] border-[1px] border-customGrey bg-white px-11 py-3 transition-colors duration-300 ease-in-out hover:bg-customGreyTwo active:bg-customGrey"
                         >
-                            <span className="text-[20px] font-semibold leading-[24px] text-customOrangeFive">
+                            <span className="text-[20px] font-semibold leading-[24px] text-customOrangeFive whitespace-nowrap max-[358px]:text-[16px] max-[358px]:leading-[19.2px]">
                               Open demo account
                             </span>
                         </button>
@@ -228,7 +228,7 @@ const Form = ({setFormSubmitted, setIsActive, formSubmitted, isActive}) => {
                 type="submit"
                 className={`${isActive ? 'bg-customOrangeFour' : 'bg-customOrangeTwo transition-colors duration-300 ease-in-out hover:bg-customOrange active:bg-customOrangeThree'} flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
             >
-                <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px]">
+                <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px] whitespace-nowrap">
                    Get the book
                 </span>
                 <Image src="/arrowWhite.svg" alt="arrow" width={34} height={3}/>

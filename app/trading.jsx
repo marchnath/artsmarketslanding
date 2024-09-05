@@ -17,8 +17,8 @@ const Trading = ({isActive, formSubmitted, setFormSubmitted, setIsActive, ref}) 
                 </div>
                 <div className="flex flex-row justify-between">
                     <Image src="/book2.png" alt="book" width={556} height={658} className="object-contain max-sm:hidden" />
-                    <div className="my-14 p-16 max-w-[610px] relative rounded-2xl max-sm:mb-6 max-sm:mt-0 max-sm:py-10 max-sm:px-3">
-                        <div className="absolute w-full h-full top-0 left-0 z-10 bg-white opacity-40 rounded-2xl"></div>
+                    <div className="my-14 p-16 max-w-[610px] relative rounded-2xl max-sm:mb-6 max-sm:mt-0 max-sm:py-8 max-sm:px-3 max-sm:min-w-fill-available">
+                        <div className="absolute w-full h-full top-0 left-0 z-10 bg-white opacity-40 rounded-2xl max-sm:bg-customGreySixteen"></div>
                         <Form isActive={isActive} formSubmitted={formSubmitted} setFormSubmitted={setFormSubmitted} setIsActive={setIsActive}/>
                     </div>
 
