@@ -1,27 +1,33 @@
 import Image from "next/image";
 import Form from "./form";
+import initTranslations from "../i18n";
 
-const Trading = ({
+const Trading = async ({
   isActive,
   formSubmitted,
   setFormSubmitted,
   setIsActive,
   ref,
+  locale,
 }) => {
+  const { t, resources } = await initTranslations(locale, ["home"]);
+
+  const book4 = locale === "ar" ? "/book4_ar.png" : "/book4.png";
+  const book2 = locale === "ar" ? "/book2_ar.png" : "/book2.png";
   return (
     <section className="relative" ref={ref} id="bookGet">
-      <div className="absolute w-full h-full top-0 left-0 z-10 bg-custom-gradient-three"></div>
+      <div className="absolute w-full h-full top-0 ltr:left-0 rtl:right-0 z-10 bg-custom-gradient-three"></div>
       <div className="max-w-[1240px] mx-auto pt-[75px] relative z-20 max-sm:pt-6 max-sm:px-4  max-sm:min-w-xs max-sm:max-w-[375px] max-sm:mx-auto">
         <Image
-          src="/book4.png"
+          src={book4}
           alt="book"
           width={188}
           height={230}
-          className="hidden absolute left-0 top-10object-cover scale-125 max-sm:block max-sm:w-[188px]  max-sm:h-[230px]"
+          className="absolute hidden ltr:left-0 rtl:right-0  top-10 rtl:top-4 object-cover scale-125 max-sm:block max-sm:w-[188px]  max-sm:h-[230px]"
         />
-        <div className="flex flex-row pl-[91px] gap-6 max-sm:flex-col max-sm:max-w-[179px] max-sm:pl-0 max-sm:ml-auto max-sm:mt-14 max-sm:mb-10">
+        <div className="flex flex-row ltr:pl-[91px] rtl:mr-[140px] gap-6 max-sm:flex-col max-sm:max-w-[179px] ltr:max-sm:pl-0 rtl:max-sm:pr-0 max-sm:ml-auto max-sm:mt-14 max-sm:mb-10">
           <h2 className="font-medium text-[44px] leading-[52.8px] text-customBlackOne max-sm:text-[16px] max-sm:leading-[19.2px]  max-sm:font-semibold">
-            Download the Trading Strategy tutorial
+            {t("Download prompt")}
           </h2>
           <div className="flex flex-row gap-5">
             <Image
@@ -30,6 +36,7 @@ const Trading = ({
               width={201}
               height={2}
               className="object-contain relative -top-7 max-sm:hidden"
+              style={{ transform: locale === "ar" ? "rotate(180deg)" : "none" }}
             />
             <Image
               src="/arrowRedTwo.svg"
@@ -39,25 +46,26 @@ const Trading = ({
               className="hidden object-contain relative -top-7 max-sm:inline-block"
             />
             <p className="text-[20px] leading-[24px] text-customOrangeThree font-medium max-sm:text-[14px] max-sm:leading-[16.8px]  max-sm:font-normal">
-              Get the 20% bonus on your deposit with the Artsmrkts broker
+              {t("Get % bonus")}
             </p>
           </div>
         </div>
         <div className="flex flex-row justify-between">
           <Image
-            src="/book2.png"
+            src={book2}
             alt="book"
             width={556}
             height={658}
-            className="object-contain max-sm:hidden"
+            className="object-contain max-sm:hidden rtl:mr-20"
           />
           <div className="my-14 p-16 max-w-[610px] relative rounded-2xl max-sm:mb-6 max-sm:mt-0 max-sm:py-8 max-sm:px-3 max-sm:min-w-fill-available">
-            <div className="absolute w-full h-full top-0 left-0 z-10 bg-white opacity-40 rounded-2xl max-sm:bg-customGreySixteen"></div>
+            <div className="absolute w-full h-full top-0 ltr:left-0 rtl:right-0 z-10 bg-white opacity-40 rounded-2xl max-sm:bg-customGreySixteen"></div>
             <Form
               isActive={isActive}
               formSubmitted={formSubmitted}
               setFormSubmitted={setFormSubmitted}
               setIsActive={setIsActive}
+              locale={locale}
             />
           </div>
         </div>

@@ -10,6 +10,7 @@ import initTranslations from "../i18n";
 import TranslationsProvider from "../../components/TranslationProvider";
 import ClientSideWrapper from "./ClientSideWrapper";
 import LanguageChanger from "../../components/LanguageChanger";
+import Footer from "./footer";
 
 export default async function Home({ params: { locale } }) {
   const { t, resources } = await initTranslations(locale, ["home"]);
@@ -21,18 +22,24 @@ export default async function Home({ params: { locale } }) {
       namespaces={["home"]}
     >
       <ClientSideWrapper>
-        <div>
-          <Header />
-          <div>{t("Authors")}</div>
-          <LanguageChanger />
+        <div dir={locale === "ar" ? "rtl" : "ltr"}>
+          <Header locale={locale} />
+          {/* {locale === "ar" && (
+            <p dir="rtl" className="mr-10">
+              hello
+            </p>
+          )} */}
+          {/* <div>{t("Authors")}</div> */}
+          {/* <LanguageChanger /> */}
           <main className="min-w-80">
-            <TradingStrategy />
-            <Strategy />
-            <BookContentsSection />
-            <WhyTradersLoseSection />
-            <PromoSection />
-            <AuthorSection />
-            <Trading />
+            <TradingStrategy locale={locale} />
+            <Strategy locale={locale} />
+            <BookContentsSection locale={locale} />
+            <WhyTradersLoseSection locale={locale} />
+            <PromoSection locale={locale} />
+            <AuthorSection locale={locale} />
+            <Trading locale={locale} />
+            <Footer locale={locale} />
           </main>
         </div>
       </ClientSideWrapper>

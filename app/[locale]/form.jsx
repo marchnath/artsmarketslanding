@@ -15,8 +15,20 @@ import {
   checkEmailExists,
   checkPhoneExists,
 } from "../../lib/supabaseClient";
+import { useTranslation } from "react-i18next";
 
-const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
+const Form = ({
+  // setFormSubmitted,
+  // setIsActive,
+  // formSubmitted,
+  // isActive,
+  locale,
+}) => {
+  const { t } = useTranslation();
+
+  const [isActive, setIsActive] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const [inputValueName, setInputValueName] = useState("");
   const [inputValueEmail, setInputValueEmail] = useState("");
   const [inputValuePhone, setInputValuePhone] = useState("");
@@ -68,6 +80,7 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
   };
 
   const handleSubmit = async (event) => {
+    console.log("see me here");
     event.preventDefault();
     setNameError(validateName(inputValueName));
     setEmailError(validateEmail(inputValueEmail));
@@ -87,11 +100,36 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
           return;
         }
 
-        await addContactWithBook(
-          inputValueName,
-          inputValueEmail,
-          inputValuePhone
-        );
+        // await addContactWithBook(
+        //   inputValueName,
+        //   inputValueEmail,
+        //   inputValuePhone
+        // );
+
+        const formData = {
+          name: inputValueName,
+          email: inputValueEmail,
+          phone_number: inputValuePhone,
+        };
+
+        try {
+          const response = await fetch("/api/sendMessage", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+          console.log(formData, "formData");
+          if (response.ok) {
+            // Handle success (e.g., display a success message)
+          } else {
+            // Handle error (e.g., display an error message)
+          }
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+
         setInputValueName("");
         setInputValueEmail("");
         setInputValuePhone("");
@@ -101,6 +139,7 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
         setCheckboxChecked(false);
         setIsActive(true);
         setFormSubmitted(true);
+        console.log(formSubmitted, "is form submitted?");
       } catch (error) {
         console.error("Error adding contact:", error);
       }
@@ -116,7 +155,7 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
       onSubmit={handleSubmit}
     >
       {formSubmitted && (
-        <div className="flex flex-col py-[35px] px-[61.5px] mx-auto items-center box-shadow-two rounded-2xl mb-7 relative max-sm:bg-transparent max-sm:border-0 max-sm:shadow-none max-sm:py-8 max-sm:px-[18px] max-[358px]:px-[0px]">
+        <div className="flex flex-col py-[35px] px-[61.5px] mx-auto items-center box-shadow-two rounded-2xl mb-7 relative bg-white max-sm:py-8 max-sm:px-[18px] max-[358px]:px-[0px]">
           <div className="flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-[100px] bg-customGreenOne">
             <Image
               src="arrow7.svg"
@@ -127,8 +166,7 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
             />
           </div>
           <p className="text-center text-[16px] leading-[19.2px] text-customBlackOne pt-4 pb-6">
-            We have already sent the book to your email address! You can also
-            open a free demo account and and start trading right now!
+            {t("we have already")}
           </p>
           <Link href="/" className="relative z-20 flex-1">
             <button
@@ -136,7 +174,7 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
               className="flex cursor-pointer flex-row items-center justify-center rounded-[44px] border-[1px] border-customGrey bg-white px-11 py-3 transition-colors duration-300 ease-in-out hover:bg-customGreyTwo active:bg-customGrey"
             >
               <span className="text-[20px] font-semibold leading-[24px] text-customOrangeFive whitespace-nowrap max-[358px]:text-[16px] max-[358px]:leading-[19.2px]">
-                Open demo account
+                {t("Open demo account")}
               </span>
             </button>
           </Link>
@@ -149,7 +187,7 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
               htmlFor="name"
               className="text-[14px] leading-[16.8px] text-customGreyEleven"
             >
-              Name
+              {t("Name")}
             </label>
             <div className="relative flex flex-row">
               <input
@@ -157,8 +195,8 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
                 type="text"
                 name="name"
                 id="name"
-                placeholder="Jack Jackson"
-                className={`w-full bg-white border-[1px] border-solid  rounded-xl pl-4 pr-12 py-[18.5px] text-[16px] leading-[19.2px] text-customBlue placeholder-customGreyThirteen outline-none  ${
+                placeholder={t("Jack Jackson")}
+                className={`w-full bg-white border-[1px] border-solid  rounded-xl ltr:pl-4 rtl:pr-4 ltr:pr-12 rtl:pl-12 py-[18.5px] text-[16px] leading-[19.2px] text-customBlue placeholder-customGreyThirteen outline-none  ${
                   nameError
                     ? "shadow-md border-customOrangeTwo"
                     : "shadow-none border-customGreyTwelve focus:border-customBlueSix"
@@ -190,7 +228,7 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
               htmlFor="email"
               className="text-[14px] leading-[16.8px] text-customGreyEleven"
             >
-              E-mail
+              {t("E-mail")}
             </label>
             <div className="relative flex flex-row">
               <input
@@ -198,8 +236,8 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
                 type="email"
                 name="email"
                 id="email"
-                placeholder="example@example.com"
-                className={`w-full bg-white border-[1px] border-solid  rounded-xl pl-4 pr-12 py-[18.5px] text-[16px] leading-[19.2px] text-customBlue placeholder-customGreyThirteen outline-none  ${
+                placeholder={t("example@example.com")}
+                className={`w-full bg-white border-[1px] border-solid  rounded-xl ltr:pl-4 rtl:pr-4 ltr:pr-12 rtl:pl-12 py-[18.5px] text-[16px] leading-[19.2px] text-customBlue placeholder-customGreyThirteen outline-none  ${
                   emailError
                     ? "shadow-md border-customOrangeTwo"
                     : "shadow-none border-customGreyTwelve focus:border-customBlueSix"
@@ -231,7 +269,7 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
               htmlFor="telephone"
               className="text-[14px] leading-[16.8px] text-customGreyEleven"
             >
-              Phone number
+              {t("Phone number")}
             </label>
             <div
               className={`h-[56px] relative flex flex-row px-2 py-1.5 border-[1px] border-solid rounded-xl bg-white ${
@@ -262,16 +300,18 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
                 id="terms1"
                 checked={checkboxChecked}
                 onCheckedChange={handleCheckboxChange}
+                className="rtl:ml-2"
               />
               <div className="grid gap-1.5 leading-none">
                 <label
                   htmlFor="terms1"
                   className="text-[16px] leading-[19.2px] text-customBlackSix leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-80"
                 >
-                  I agree to the processing of personal data in accordance with
-                  the{" "}
+                  {t(
+                    "I agree to the processing of personal data in accordance with the"
+                  )}
                   <span className="underline text-customRedText active:bg-customOrangeFour">
-                    Privacy Policy
+                    {t("Privacy Policy")}
                   </span>
                 </label>
               </div>
@@ -292,9 +332,15 @@ const Form = ({ setFormSubmitted, setIsActive, formSubmitted, isActive }) => {
         } flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
       >
         <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px] whitespace-nowrap">
-          Get the book
+          {t("Get the book")}
         </span>
-        <Image src="/arrowWhite.svg" alt="arrow" width={34} height={3} />
+        <Image
+          src="/arrowWhite.svg"
+          alt="arrow"
+          width={34}
+          height={3}
+          style={{ transform: locale === "ar" ? "rotate(180deg)" : "none" }}
+        />
       </button>
     </form>
   );

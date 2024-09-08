@@ -1,5 +1,3 @@
-// validators.js
-
 export const validateName = (name) => {
   const namePattern = /^[A-Za-z\s\-']+$/;
   if (name.length < 1) {

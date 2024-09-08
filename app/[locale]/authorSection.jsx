@@ -1,6 +1,8 @@
 import Image from "next/image";
+import initTranslations from "../i18n";
 
-const AuthorSection = ({ ref }) => {
+const AuthorSection = async ({ ref, locale }) => {
+  const { t, resources } = await initTranslations(locale, ["home"]);
   return (
     <section
       className="bg-customGreyFour max-sm:bg-white"
@@ -16,10 +18,8 @@ const AuthorSection = ({ ref }) => {
           className="object-contain pb-[60px] max-sm:pb-0 hidden max-sm:pt-3 max-sm:inline-block"
         />
         <p className="text-[32px] leading-[38.4px] font-medium text-customGreyEleven max-w-[1153px] w-full max-sm:text-[14px] max-sm:leading-[16.8px] max-sm:font-normal">
-          <span className="text-customOrangeTwo max-sm:hidden">//</span>We’ve
-          uncovered the strategies employed by institutional funds, bank
-          traders, and their brokers. Our goal is to empower clients with the
-          knowledge they need to confidently manage and grow their capital
+          <span className="text-customOrangeTwo max-sm:hidden">//</span>
+          {t("we have uncovered")}
         </p>
         <div className="flex flex-row gap-7 max-sm:flex-col max-sm:font-semibold">
           <div className="flex flex-row gap-9 max-sm:gap-4  max-sm:mx-auto">
@@ -28,7 +28,9 @@ const AuthorSection = ({ ref }) => {
               alt="commas"
               height={158}
               width={223}
-              className="object-contain pb-[60px] max-sm:hidden"
+              className={`object-contain pb-[60px] max-sm:hidden ${
+                locale === "ar" ? "scale-x-[-1]" : ""
+              }`}
             />
             <div className="flex flex-col max-sm:flex-1">
               <Image
@@ -39,10 +41,10 @@ const AuthorSection = ({ ref }) => {
                 className="object-contain mb-4 rounded-lg"
               />
               <p className="mb-2 text-[14px] leading-[16.8px] font-semibold text-customGreyEleven">
-                Michael Kunze
+                {t("Michael Kunze")}
               </p>
               <p className="mb-2 text-[12px] leading-[14.4px] text-customGreyEleven">
-                Trading Expert
+                {t("Trading Expert")}
               </p>
             </div>
             <div className="flex flex-col  max-sm:flex-1">
@@ -54,15 +56,16 @@ const AuthorSection = ({ ref }) => {
                 className="object-contain mb-4 rounded-lg"
               />
               <p className="mb-2 text-[14px] leading-[16.8px] font-semibold text-customGreyEleven">
-                Jack Khalib
+                {t("Jack Khalib")}
               </p>
               <p className="mb-2 text-[12px] leading-[14.4px] text-customGreyEleven max-w-[161px]">
-                Capital Manager Svenska Handelsbanken
+                <p> {t("Capital Manager")}</p>{" "}
+                <p>{t("Svenska Handelsbanken")}</p>
               </p>
             </div>
           </div>
           <p className="text-customOrangeThree text-[20px] leading-[24px] font-semibold max-sm:order-[-1] max-sm:text-[14px] max-sm:leading-[16.8px]">
-            Co-authors of the book (c)
+            {t("Co-authors")}
           </p>
         </div>
       </div>

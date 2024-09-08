@@ -1,6 +1,8 @@
 import Image from "next/image";
+import initTranslations from "../i18n";
 
-const WhyTradersLoseSection = ({ ref }) => {
+const WhyTradersLoseSection = async ({ ref, locale }) => {
+  const { t, resources } = await initTranslations(locale, ["home"]);
   return (
     <section className="relative" ref={ref} id="reasonsFailure">
       <div className="absolute w-full h-full top-0 left-0 z-10 box-shadow-three max-sm:hidden"></div>
@@ -15,7 +17,7 @@ const WhyTradersLoseSection = ({ ref }) => {
         <div className="flex flex-col py-[51px] gap-10 max-sm:gap-0 max-sm:py-0">
           <div className="max-sm:flex max-sm:flex-row">
             <h2 className="text-[44px] font-medium leading-[52.8px] text-customBlackOne max-sm:text-[20px] max-sm:leading-[24px] max-sm:font-semibold max-sm:pt-4">
-              Why do traders lose?
+              {t("why do traders lose")}
             </h2>
             <Image
               src="/man3.png"
@@ -44,7 +46,7 @@ const WhyTradersLoseSection = ({ ref }) => {
                                 max-sm:text-[14px] max-sm:leading-[16.8px]
                                 "
                 >
-                  Chasing Prices and Suffering Losses
+                  {t("Chasing Prices and Suffering Losses")}
                 </p>
               </div>
             </li>
@@ -61,7 +63,7 @@ const WhyTradersLoseSection = ({ ref }) => {
                                 max-sm:text-[14px] max-sm:leading-[16.8px]
                                 "
                 >
-                  Misunderstanding Market Direction
+                  {t("Misunderstanding Market Direction")}
                 </p>
               </div>
             </li>
@@ -78,7 +80,7 @@ const WhyTradersLoseSection = ({ ref }) => {
                                 max-sm:text-[14px] max-sm:leading-[16.8px]
                                 "
                 >
-                  Choosing the Wrong Timeframe
+                  {t("Choosing the Wrong Timeframe")}
                 </p>
               </div>
             </li>
@@ -95,7 +97,7 @@ const WhyTradersLoseSection = ({ ref }) => {
                                 max-sm:text-[14px] max-sm:leading-[16.8px]
                                 "
                 >
-                  Entering Trades at the Wrong Time
+                  {t("Entering Trades at the Wrong Time")}
                 </p>
               </div>
             </li>
@@ -112,15 +114,14 @@ const WhyTradersLoseSection = ({ ref }) => {
                                 max-sm:text-[14px] max-sm:leading-[16.8px]
                                 "
                 >
-                  Falling Victim to Market Manipulation
+                  {t("Falling Victim to Market Manipulation")}
                 </p>
               </div>
             </li>
           </ul>
           <p className="text-[24px] leading-[28.8px] font-medium text-customBlackOne max-sm:pt-4 max-sm:text-[16px] max-sm:leading-[19.2px] max-sm:font-semibold">
-            <span className="text-customOrangeTwo">///</span> Our tutorial
-            provides the insights and solutions to help you trade more
-            effectively
+            <span className="text-customOrangeTwo">///</span>{" "}
+            {t("Strategy tutorial")}
           </p>
         </div>
       </div>
