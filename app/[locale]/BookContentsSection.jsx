@@ -114,7 +114,7 @@ const BookContentsSection = async ({ ref, handleClickButton, locale }) => {
             <p className="p-2.5 text-customBlackOne text-[20px] leading-[24px] max-sm:text-[16px] max-sm:leading-[19.2px]">
               {t("Psychological preparation for trades")}
             </p>
-            <p className="p-2.5 text-customBlackOne text-[20px] leading-[24px] max-sm:text-[16px] max-sm:leading-[19.2px]">
+            <p className="p-2.5 text-customBlackOne text-[20px] leading-[24px] max-sm:text-[16px] max-sm:leading-[19.2px] border-t border-customGreyrules">
               {t("Money management rules")}
             </p>
           </div>
@@ -130,7 +130,15 @@ const BookContentsSection = async ({ ref, handleClickButton, locale }) => {
               <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px]">
                 {t("Get the book")}
               </span>
-              <Image src="/arrowWhite.svg" alt="arrow" width={34} height={3} />
+              <Image
+                src="/arrowWhite.svg"
+                alt="arrow"
+                width={34}
+                height={3}
+                style={{
+                  transform: locale === "ar" ? "rotate(180deg)" : "none",
+                }}
+              />
             </button>
           </Link>
         </div>

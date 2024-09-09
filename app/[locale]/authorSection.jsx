@@ -21,7 +21,7 @@ const AuthorSection = async ({ ref, locale }) => {
           <span className="text-customOrangeTwo max-sm:hidden">//</span>
           {t("we have uncovered")}
         </p>
-        <div className="flex flex-row gap-7 max-sm:flex-col max-sm:font-semibold">
+        <div className="flex flex-row gap-7 max-sm:flex-col items-end max-sm:font-semibold">
           <div className="flex flex-row gap-9 max-sm:gap-4  max-sm:mx-auto">
             <Image
               src="/commas.png"

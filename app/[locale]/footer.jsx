@@ -79,7 +79,11 @@ const Footer = ({ locale }) => {
               </Link>
             </li>
             <li>
-              <Link href="/" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.instagram.com/artsmrkts?igsh=MXN2dndzaWRnNjQzNA=="
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={
                     hoveredIcon === "instagram"
@@ -132,7 +136,11 @@ const Footer = ({ locale }) => {
               </Link>
             </li>
             <li>
-              <Link href="/" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://twitter.com/artsmrkts?s=11&t=HZLcD36vbgd7FHwGyYZ08w"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={hoveredIcon === "unix" ? "unixHover.svg" : "unix.svg"}
                   alt="unix"

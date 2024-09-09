@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { useState } from "react";
+import { use, useState, useEffect } from "react";
 import {
   validateName,
   validateEmail,
@@ -37,6 +37,22 @@ const Form = ({
   const [phoneError, setPhoneError] = useState("");
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState("");
+  const [defaultCountry, setDefaultCountry] = useState("US");
+
+  useEffect(() => {
+    const fetchCountry = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        console.log(data, "data");
+        setDefaultCountry(data.country_code);
+      } catch (error) {
+        console.error("Error fetching country code:", error);
+      }
+    };
+    fetchCountry();
+  }, []); // Empty dependency array to run the effect only once
+
   const handleChange = (eventOrValue, name) => {
     if (name === "telephone") {
       setInputValuePhone(eventOrValue);
@@ -280,7 +296,7 @@ const Form = ({
             >
               <PhoneInput
                 international
-                defaultCountry="US"
+                defaultCountry={defaultCountry}
                 type="telephone"
                 name="telephone"
                 id="telephone"
@@ -310,9 +326,14 @@ const Form = ({
                   {t(
                     "I agree to the processing of personal data in accordance with the"
                   )}
-                  <span className="underline text-customRedText active:bg-customOrangeFour">
+                  <a
+                    href="https://drive.google.com/file/d/1SaRFtM6Ju29GN-TPSsuWAKxKtUuepSwg/view"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-customRedText active:bg-customOrangeFour"
+                  >
                     {t("Privacy Policy")}
-                  </span>
+                  </a>
                 </label>
               </div>
             </div>
