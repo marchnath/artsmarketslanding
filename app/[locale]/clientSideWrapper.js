@@ -1,12 +1,21 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 export default function ClientSideWrapper({ children }) {
   const { t } = useTranslation();
+  const router = useRouter(); // Ensure useRouter is correctly used
   const [isActive, setIsActive] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  useEffect(() => {
+    const { locale, defaultLocale } = router;
+    if (locale !== defaultLocale) {
+      router.push(router.asPath, router.asPath, { locale });
+    }
+  }, [router]);
 
   const refs = {
     tradingStrategy: useRef(null),
