@@ -59,7 +59,7 @@ const Footer = ({ locale }) => {
           </Link>
 
           <ul className="flex flex-row gap-2">
-            <li>
+            {/* <li>
               <Link href="/" target="_blank" rel="noopener noreferrer">
                 <Image
                   src={
@@ -77,7 +77,7 @@ const Footer = ({ locale }) => {
                   onMouseLeave={() => setHoveredIcon(null)}
                 />
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href="https://www.instagram.com/artsmrkts?igsh=MXN2dndzaWRnNjQzNA=="
@@ -102,7 +102,11 @@ const Footer = ({ locale }) => {
               </Link>
             </li>
             <li>
-              <Link href="/" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="/https://www.linkedin.com/company/artsmrkts"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={hoveredIcon === "in" ? "inHover.svg" : "in.svg"}
                   alt="in"
@@ -117,7 +121,11 @@ const Footer = ({ locale }) => {
               </Link>
             </li>
             <li>
-              <Link href="/" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="/https://t.me/artsmrkts"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={
                     hoveredIcon === "telegram"
@@ -135,7 +143,7 @@ const Footer = ({ locale }) => {
                 />
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="https://twitter.com/artsmrkts?s=11&t=HZLcD36vbgd7FHwGyYZ08w"
                 target="_blank"
@@ -153,7 +161,7 @@ const Footer = ({ locale }) => {
                   onMouseLeave={() => setHoveredIcon(null)}
                 />
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
