@@ -8,7 +8,7 @@ import BookContentsSection from "./BookContentsSection";
 import Header from "./header";
 import initTranslations from "../i18n";
 import TranslationsProvider from "../../components/TranslationProvider";
-import ClientSideWrapper from "./ClientSideWrapper";
+import ClientSideWrapper from "./clientSideWrapper";
 import LanguageChanger from "../../components/LanguageChanger";
 import Footer from "./footer";
 
