@@ -4,6 +4,8 @@ import "./globals.css";
 import React from "react";
 import Footer from "./footer";
 import initTranslations from "../i18n";
+import { Suspense } from "react";
+import { Metrika } from "./metrika";
 
 const arimo = Arimo({
   subsets: ["latin"],
@@ -24,8 +26,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={arimo.className}>
-        {children}
-        {/* <Footer /> */}
+        <Suspense>
+          <Metrika />
+          {children}
+          {/* <Footer /> */}
+        </Suspense>
       </body>
     </html>
   );

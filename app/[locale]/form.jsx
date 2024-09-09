@@ -164,11 +164,25 @@ const Form = ({
     }
   };
 
+  useEffect(() => {
+    // Ensure the ym function is available
+    if (typeof ym === "undefined") {
+      console.error("Yandex.Metrika is not loaded");
+    } else {
+      // Track the form view event
+      ym(98279723, "reachGoal", "form-view");
+    }
+  }, [window.ym]);
+
   return (
     <form
       className="flex flex-col gap-2 relative z-20"
       name="form-call"
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+        ym(98279723, "reachGoal", "form");
+        handleSubmit(e); // Handle the form submission
+      }}
     >
       {formSubmitted && (
         <div className="flex flex-col py-[35px] px-[61.5px] mx-auto items-center box-shadow-two rounded-2xl mb-7 relative bg-white max-sm:py-8 max-sm:px-[18px] max-[358px]:px-[0px]">
@@ -184,7 +198,10 @@ const Form = ({
           <p className="text-center text-[16px] leading-[19.2px] text-customBlackOne pt-4 pb-6">
             {t("we have already")}
           </p>
-          <Link href="/" className="relative z-20 flex-1">
+          <Link
+            href="https://www.artsmrkts.com"
+            className="relative z-20 flex-1"
+          >
             <button
               type="button"
               className="flex cursor-pointer flex-row items-center justify-center rounded-[44px] border-[1px] border-customGrey bg-white px-11 py-3 transition-colors duration-300 ease-in-out hover:bg-customGreyTwo active:bg-customGrey"
@@ -351,6 +368,10 @@ const Form = ({
             ? "bg-customOrangeFour"
             : "bg-customOrangeTwo transition-colors duration-300 ease-in-out hover:bg-customOrange active:bg-customOrangeThree"
         } flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
+        onClick={() => {
+          ym(98279723, "reachGoal", "form");
+          return true;
+        }}
       >
         <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px] whitespace-nowrap">
           {t("Get the book")}

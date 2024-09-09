@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import TradingStrategy from "@/app/[locale]/tradingStrategy";
 import Trading from "@/app/[locale]/trading";
 import Strategy from "./strategy";
@@ -12,8 +15,37 @@ import ClientSideWrapper from "./clientSideWrapper";
 import LanguageChanger from "../../components/LanguageChanger";
 import Footer from "./footer";
 
-export default async function Home({ params: { locale } }) {
-  const { t, resources } = await initTranslations(locale, ["home"]);
+export default function Home({ params: { locale } }) {
+  const [isYmLoaded, setIsYmLoaded] = useState(false);
+  const [translations, setTranslations] = useState({
+    t: () => "",
+    resources: {},
+  });
+
+  useEffect(() => {
+    const checkYm = () => {
+      if (typeof window.ym !== "undefined") {
+        setIsYmLoaded(true);
+      } else {
+        setTimeout(checkYm, 100);
+      }
+    };
+
+    checkYm();
+
+    const loadTranslations = async () => {
+      const { t, resources } = await initTranslations(locale, ["home"]);
+      setTranslations({ t, resources });
+    };
+
+    loadTranslations();
+  }, [locale]);
+
+  if (!isYmLoaded) {
+    return <div>Loading...</div>;
+  }
+
+  const { t, resources } = translations;
 
   return (
     <TranslationsProvider
@@ -24,13 +56,6 @@ export default async function Home({ params: { locale } }) {
       <ClientSideWrapper>
         <div dir={locale === "ar" ? "rtl" : "ltr"}>
           <Header locale={locale} />
-          {/* {locale === "ar" && (
-            <p dir="rtl" className="mr-10">
-              hello
-            </p>
-          )} */}
-          {/* <div>{t("Authors")}</div> */}
-          {/* <LanguageChanger /> */}
           <main className="min-w-80">
             <TradingStrategy locale={locale} />
             <Strategy locale={locale} />
