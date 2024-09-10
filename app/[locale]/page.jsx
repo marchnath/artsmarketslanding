@@ -45,8 +45,9 @@ export default function Home({ params: { locale } }) {
   useEffect(() => {
     if (formSubmitted) {
       toast("Congratulations!", { autoClose: 5000 });
-      setFormSubmitted(false);
+      setFormSubmitted(true);
     }
+    console.log("formSubmitted", formSubmitted);
   }, [formSubmitted]);
 
   if (!isYmLoaded) {

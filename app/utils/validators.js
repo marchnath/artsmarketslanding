@@ -1,5 +1,5 @@
 export const validateName = (name) => {
-  const namePattern = /^[A-Za-z\s\-']+$/;
+  const namePattern = /^[\p{L}\s\-']+$/u; // Updated regex to allow any Unicode letters
   if (name.length < 1) {
     return "Name is required";
   } else if (name.length < 2) {
@@ -7,7 +7,7 @@ export const validateName = (name) => {
   } else if (name.length > 50) {
     return "The name must contain no more than 50 characters.";
   } else if (!namePattern.test(name)) {
-    return "Maximum length is 50 characters";
+    return "Invalid characters in name";
   } else {
     return "";
   }

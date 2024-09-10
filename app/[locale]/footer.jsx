@@ -50,7 +50,7 @@ const Footer = ({ locale }) => {
         </div>
         <div className="flex flex-row justify-between border-t-[1px] border-customBlueFour pt-11  max-sm:pt-6">
           <Link
-            href="/https://drive.google.com/file/d/1SaRFtM6Ju29GN-TPSsuWAKxKtUuepSwg/view?usp=sharing"
+            href="https://drive.google.com/file/d/1SaRFtM6Ju29GN-TPSsuWAKxKtUuepSwg/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[14px] leading-[16.8px] text-customBlackOne max-sm:text-[16px] max-sm:leading-[19.2px]"
@@ -103,7 +103,7 @@ const Footer = ({ locale }) => {
             </li>
             <li>
               <Link
-                href="/https://www.linkedin.com/company/artsmrkts"
+                href="https://www.linkedin.com/company/artsmrkts"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -122,7 +122,7 @@ const Footer = ({ locale }) => {
             </li>
             <li>
               <Link
-                href="/https://t.me/artsmrkts"
+                href="https://t.me/artsmrkts"
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 import i18nConfig from "@/i18nConfig";
 
-const Header = ({ handleClickButton, locale }) => {
+const Header = ({ locale }) => {
   const [activeMenu, setActiveMenu] = useState(false);
   const [activeLanguage, setActiveLanguage] = useState(false);
   const [activeLanguageMobile, setActiveLanguageMobile] = useState(false);
@@ -277,7 +277,7 @@ const Header = ({ handleClickButton, locale }) => {
             </>
           )}
         </div>
-        <Link href="#bookGet" name="bookGet" onClick={handleClickButton}>
+        <Link href="#bookGet" name="bookGet">
           <button
             type="button"
             className="whitespace-nowrap flex  cursor-pointer items-center justify-center rounded-[44px] bg-customBlueFon px-8 py-2 hover:bg-customBlue active:bg-customBlueTwo"

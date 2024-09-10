@@ -153,6 +153,24 @@ const Form = ({
           console.error("An error occurred:", error);
         }
 
+        try {
+          const response = await fetch("/api/send-email", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+          console.log(formData, "formData");
+          if (response.ok) {
+            // Handle success (e.g., display a success message)
+          } else {
+            // Handle error (e.g., display an error message)
+          }
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+
         setInputValueName("");
         setInputValueEmail("");
         setInputValuePhone("");
