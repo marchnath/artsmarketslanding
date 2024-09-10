@@ -14,6 +14,7 @@ const Trading = async ({
 
   const book4 = locale === "ar" ? "/book4_ar.png" : "/book4.png";
   const book2 = locale === "ar" ? "/book2_ar.png" : "/book2.png";
+
   return (
     <section className="relative" ref={ref} id="bookGet">
       <div className="absolute w-full h-full top-0 ltr:left-0 rtl:right-0 z-10 bg-custom-gradient-three"></div>
@@ -35,7 +36,7 @@ const Trading = async ({
               alt="arrow"
               width={201}
               height={2}
-              className="object-contain relative -top-7 max-sm:hidden"
+              className="object-contain relative rtl:-top-7 top-0 max-sm:hidden"
               style={{ transform: locale === "ar" ? "rotate(180deg)" : "none" }}
             />
             <Image
@@ -43,9 +44,10 @@ const Trading = async ({
               alt="arrow"
               width={31}
               height={2}
-              className="hidden object-contain relative -top-7 max-sm:inline-block"
+              className="hidden object-contain relative -top-2 max-sm:inline-block"
+              style={{ transform: locale === "ar" ? "rotate(180deg)" : "none" }}
             />
-            <p className="text-[20px] leading-[24px] text-customOrangeThree font-medium max-sm:text-[14px] max-sm:leading-[16.8px]  max-sm:font-normal">
+            <p className="text-[20px] leading-[24px] sm:mt-8 rtl:sm:mb-20   text-customOrangeThree font-medium max-sm:text-[14px] max-sm:leading-[16.8px]  max-sm:font-normal">
               {t("Get % bonus")}
             </p>
           </div>
@@ -66,6 +68,7 @@ const Trading = async ({
               setFormSubmitted={setFormSubmitted}
               setIsActive={setIsActive}
               locale={locale}
+              sectionId={"bookGet"}
             />
           </div>
         </div>

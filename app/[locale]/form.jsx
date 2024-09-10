@@ -28,10 +28,10 @@ const Form = ({
   // isActive,
   locale,
   onFormSubmit,
+  sectionId,
 }) => {
   const { t } = useTranslation();
 
-  const [isActive, setIsActive] = useState(false);
   // const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [inputValueName, setInputValueName] = useState("");
@@ -43,8 +43,9 @@ const Form = ({
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState("");
   const [defaultCountry, setDefaultCountry] = useState("US");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  const { formSubmitted, setFormSubmitted } = useLandingContext();
+  const { formSubmitted, setFormSubmitted, setSectionID } = useLandingContext();
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -103,10 +104,21 @@ const Form = ({
   };
 
   function redirectToWebsite() {
+    openBook();
     setTimeout(() => {
       window.location.href = "https://www.artsmrkts.com";
     }, 6000);
   }
+
+  const openBook = () => {
+    const arabicBook =
+      "https://drive.google.com/file/d/1Xu-wy93tCthtCvLMjNuAvkyUchqCYdPT/view";
+    const englishBook =
+      "https://drive.google.com/file/d/1yAAv5IofSiNheaDVG1ZLSRNC8BhZ7fZ1/view?usp=sharing";
+
+    const bookLink = locale === "ar" ? arabicBook : englishBook;
+    window.open(bookLink, "_blank");
+  };
 
   const handleSubmit = async (event) => {
     console.log("see me here");
@@ -146,6 +158,10 @@ const Form = ({
           console.log(formData, "formData");
           if (response.ok) {
             // Handle success (e.g., display a success message)
+            // Scroll to the form section
+            document
+              .querySelector(sectionId)
+              .scrollIntoView({ behavior: "smooth" });
           } else {
             // Handle error (e.g., display an error message)
           }
@@ -162,8 +178,12 @@ const Form = ({
             body: JSON.stringify(formData),
           });
           console.log(formData, "formData");
-          if (response.ok) {
+          if (response.ok && sectionId === "bookGet") {
             // Handle success (e.g., display a success message)
+            // Scroll to the form section
+            document
+              .querySelector("bookGet")
+              .scrollIntoView({ behavior: "smooth" });
           } else {
             // Handle error (e.g., display an error message)
           }
@@ -178,11 +198,10 @@ const Form = ({
         setEmailError("");
         setPhoneError("");
         setCheckboxChecked(false);
-        setIsActive(true);
+        // setIsActive(true);
         setFormSubmitted(true);
+        setSectionID(sectionId);
         // notify();
-
-        redirectToWebsite();
 
         console.log(formSubmitted, "is form submitted?");
       } catch (error) {
@@ -214,32 +233,51 @@ const Form = ({
       }}
     >
       {formSubmitted && (
-        <div className="flex flex-col py-[35px] px-[61.5px] mx-auto items-center box-shadow-two rounded-2xl mb-7 relative bg-white max-sm:py-8 max-sm:px-[18px] max-[358px]:px-[0px]">
-          <div className="flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-[100px] bg-customGreenOne">
-            <Image
-              src="arrow7.svg"
-              alt="call"
-              width={18}
-              height={15}
-              className="object-contain "
-            />
-          </div>
-          <p className="text-center text-[16px] leading-[19.2px] text-customBlackOne pt-4 pb-6">
-            {t("we have already")}
-          </p>
-          <Link
-            href="https://www.artsmrkts.com"
-            className="relative z-20 flex-1"
+        <div>
+          {" "}
+          <button
+            type="submit"
+            className={`${"bg-customOrangeTwo z-50 mb-6  duration-300 w-full ease-in-out hover:bg-customOrange active:bg-customOrangeThree"} flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
+            onClick={redirectToWebsite}
           >
-            <button
-              type="button"
-              className="flex cursor-pointer flex-row items-center justify-center rounded-[44px] border-[1px] border-customGrey bg-white px-11 py-3 transition-colors duration-300 ease-in-out hover:bg-customGreyTwo active:bg-customGrey"
+            <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px] whitespace-nowrap">
+              {t("Get the book")}
+            </span>
+            <Image
+              src="/arrowWhite.svg"
+              alt="arrow"
+              width={34}
+              height={3}
+              style={{ transform: locale === "ar" ? "rotate(180deg)" : "none" }}
+            />
+          </button>
+          <div className="flex flex-col py-[35px] px-[61.5px] mx-auto items-center box-shadow-two rounded-2xl mb-7 relative bg-white max-sm:py-8 max-sm:px-[18px] max-[358px]:px-[0px]">
+            <div className="flex h-[60px] w-[60px] cursor-pointer items-center justify-center rounded-[100px] bg-customGreenOne">
+              <Image
+                src="arrow7.svg"
+                alt="call"
+                width={18}
+                height={15}
+                className="object-contain "
+              />
+            </div>
+            <p className="text-center text-[16px] leading-[19.2px] text-customBlackOne pt-4 pb-6">
+              {t("we have already")}
+            </p>
+            <Link
+              href="https://www.artsmrkts.com"
+              className="relative z-20 flex-1"
             >
-              <span className="text-[20px] font-semibold leading-[24px] text-customOrangeFive whitespace-nowrap max-[358px]:text-[16px] max-[358px]:leading-[19.2px]">
-                {t("Open demo account")}
-              </span>
-            </button>
-          </Link>
+              <button
+                type="button"
+                className="flex cursor-pointer flex-row items-center justify-center rounded-[44px] border-[1px] border-customGrey bg-white px-11 py-3 transition-colors duration-300 ease-in-out hover:bg-customGreyTwo active:bg-customGrey"
+              >
+                <span className="text-[20px] font-semibold leading-[24px] text-customOrangeFive whitespace-nowrap max-[358px]:text-[16px] max-[358px]:leading-[19.2px]">
+                  {t("Open demo account")}
+                </span>
+              </button>
+            </Link>
+          </div>
         </div>
       )}
       {!formSubmitted && (
@@ -411,30 +449,27 @@ const Form = ({
           </div>
         </div>
       )}
-      <button
-        disabled={isActive}
-        type="submit"
-        className={`${
-          isActive
-            ? "bg-customOrangeFour"
-            : "bg-customOrangeTwo transition-colors duration-300 ease-in-out hover:bg-customOrange active:bg-customOrangeThree"
-        } flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
-        onClick={() => {
-          ym(98279723, "reachGoal", "form");
-          return true;
-        }}
-      >
-        <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px] whitespace-nowrap">
-          {t("Get the book")}
-        </span>
-        <Image
-          src="/arrowWhite.svg"
-          alt="arrow"
-          width={34}
-          height={3}
-          style={{ transform: locale === "ar" ? "rotate(180deg)" : "none" }}
-        />
-      </button>
+      {!formSubmitted && (
+        <button
+          // type="submit"
+          className={`${"bg-customOrangeTwo transition-colors duration-300 ease-in-out hover:bg-customOrange active:bg-customOrangeThree"} flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
+          onClick={() => {
+            ym(98279723, "reachGoal", "form");
+            return true;
+          }}
+        >
+          <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px] whitespace-nowrap">
+            {t("Get the book")}
+          </span>
+          <Image
+            src="/arrowWhite.svg"
+            alt="arrow"
+            width={34}
+            height={3}
+            style={{ transform: locale === "ar" ? "rotate(180deg)" : "none" }}
+          />
+        </button>
+      )}
     </form>
   );
 };

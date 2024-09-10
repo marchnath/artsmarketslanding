@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import TradingStrategy from "@/app/[locale]/tradingStrategy";
 import Trading from "@/app/[locale]/trading";
 import Strategy from "./strategy";
@@ -19,7 +19,7 @@ import { useLandingContext } from "./context/context";
 
 export default function Home({ params: { locale } }) {
   const [isYmLoaded, setIsYmLoaded] = useState(false);
-  const { formSubmitted, setFormSubmitted } = useLandingContext();
+  const { formSubmitted, setFormSubmitted, sectionID } = useLandingContext();
   const [translations, setTranslations] = useState({
     t: () => "",
     resources: {},
@@ -42,13 +42,23 @@ export default function Home({ params: { locale } }) {
     loadTranslations();
   }, [locale]);
 
+  // useEffect(() => {
+  //   if (formSubmitted) {
+  //     toast("Congratulations!", { autoClose: 5000 });
+  //     setFormSubmitted(true);
+  //   }
+  //   console.log("formSubmitted", formSubmitted);
+  // }, [formSubmitted]);
+
   useEffect(() => {
-    if (formSubmitted) {
-      toast("Congratulations!", { autoClose: 5000 });
-      setFormSubmitted(true);
+    if (sectionID) {
+      console.log("sectionID", sectionID);
+      const element = document.getElementById(sectionID);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
-    console.log("formSubmitted", formSubmitted);
-  }, [formSubmitted]);
+  }, [sectionID]);
 
   if (!isYmLoaded) {
     return <div>Loading...</div>;
@@ -63,7 +73,7 @@ export default function Home({ params: { locale } }) {
       namespaces={["home"]}
     >
       {/* <LandingProvider> */}
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <ClientSideWrapper>
         <div dir={locale === "ar" ? "rtl" : "ltr"}>
           <Header locale={locale} />

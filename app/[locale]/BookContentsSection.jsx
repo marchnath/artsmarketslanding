@@ -24,7 +24,6 @@ const BookContentsSection = async ({ ref, handleClickButton, locale }) => {
                 +
               </span>
             </div>
-            <div className="w-4 h-3.5 bg-customGreySeventeen my-auto absolute left-8 top-3.5 rtl:right-8"></div>
             <div className="px-4 bg-customGreySeventeen rounded-[100px] flex items-center justify-center">
               <p className="text-customBlackFour text-[16px] leading-[19.2px]">
                 {t("Useful indicators for trading strategies")}
@@ -65,7 +64,7 @@ const BookContentsSection = async ({ ref, handleClickButton, locale }) => {
                     +
                   </span>
                 </div>
-                <div className="w-4 h-3.5 bg-customGreySeventeen my-auto absolute left-8 top-3.5 max-sm:hidden"></div>
+
                 <div className="px-4 bg-customGreySeventeen rounded-[100px] flex items-center justify-center max-sm:px-0 max-sm:bg-transparent">
                   <p className="text-customBlackFour text-[16px] leading-[19.2px] max-sm:text-[12px] max-sm:leading-[14.4px]">
                     {t(

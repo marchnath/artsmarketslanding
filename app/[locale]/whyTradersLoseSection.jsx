@@ -32,14 +32,13 @@ const WhyTradersLoseSection = async ({ ref, locale }) => {
                     max-sm:relative max-sm:rounded-t-[44px]
                     "
           >
-            <div className="absolute w-full h-full top-0 left-0 bg-custom-gradient-four hidden max-sm:rounded-t-[44px] max-sm:inline-block"></div>
             <li className="flex flex-row relative gap-0.5">
               <div className="w-10 h-10 bg-customGreySeventeen rounded-[100px] flex items-center justify-center">
                 <span className="text-white flex items-center justify-center w-6 h-6 rounded-[100px] px-2 bg-customOrangeTwo text-[20px] leading-[24px]">
                   1
                 </span>
               </div>
-              <div className="w-4 h-3.5 bg-customGreySeventeen my-auto absolute left-8 top-3.5"></div>
+
               <div className="px-4 bg-customGreySeventeen rounded-[100px] flex items-center justify-center">
                 <p
                   className="text-customBlackFour text-[16px] leading-[19.2px]
@@ -56,7 +55,6 @@ const WhyTradersLoseSection = async ({ ref, locale }) => {
                   2
                 </span>
               </div>
-              <div className="w-4 h-3.5 bg-customGreySeventeen my-auto absolute left-8 top-3.5"></div>
               <div className="px-4 bg-customGreySeventeen rounded-[100px] flex items-center justify-center">
                 <p
                   className="text-customBlackFour text-[16px] leading-[19.2px]
@@ -73,7 +71,6 @@ const WhyTradersLoseSection = async ({ ref, locale }) => {
                   3
                 </span>
               </div>
-              <div className="w-4 h-3.5 bg-customGreySeventeen my-auto absolute left-8 top-3.5"></div>
               <div className="px-4 bg-customGreySeventeen rounded-[100px] flex items-center justify-center">
                 <p
                   className="text-customBlackFour text-[16px] leading-[19.2px]
@@ -90,7 +87,6 @@ const WhyTradersLoseSection = async ({ ref, locale }) => {
                   4
                 </span>
               </div>
-              <div className="w-4 h-3.5 bg-customGreySeventeen my-auto absolute left-8 top-3.5"></div>
               <div className="px-4 bg-customGreySeventeen rounded-[100px] flex items-center justify-center">
                 <p
                   className="text-customBlackFour text-[16px] leading-[19.2px]
@@ -107,7 +103,6 @@ const WhyTradersLoseSection = async ({ ref, locale }) => {
                   5
                 </span>
               </div>
-              <div className="w-4 h-3.5 bg-customGreySeventeen my-auto absolute left-8 top-3.5"></div>
               <div className="px-4 bg-customGreySeventeen rounded-[100px] flex items-center justify-center">
                 <p
                   className="text-customBlackFour text-[16px] leading-[19.2px]
