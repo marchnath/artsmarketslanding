@@ -55,7 +55,7 @@ const Footer = ({ locale }) => {
             rel="noopener noreferrer"
             className="text-[14px] leading-[16.8px] text-customBlackOne max-sm:text-[16px] max-sm:leading-[19.2px]"
           >
-            {t("Privacy Policy")}
+            {t("Privacy Policy footer")}
           </Link>
 
           <ul className="flex flex-row gap-2">

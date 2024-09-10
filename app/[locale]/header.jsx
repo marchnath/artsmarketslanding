@@ -24,7 +24,6 @@ const Header = ({ handleClickButton, locale }) => {
     if (window.innerWidth < 640) {
       setActiveMenu(!activeMenu);
     }
-    handleClickButton();
   };
 
   const { i18n } = useTranslation();

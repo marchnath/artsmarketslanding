@@ -74,21 +74,6 @@ const BookContentsSection = async ({ ref, handleClickButton, locale }) => {
                   </p>
                 </div>
               </div>
-              <div className="hidden max-sm:flex flex-row gap-0.5 relative ml-10 max-sm:gap-4  max-sm:ml-12 max-sm:mt-2   rtl:max-sm:mr-12">
-                <div className="w-10 h-10 bg-customGreySeventeen rounded-[100px] flex items-center justify-center max-sm:bg-transparent">
-                  <span className="text-white flex items-center justify-center w-6 h-6 rounded-[100px] px-2 bg-customBlueSix text-[20px] leading-[52.8px] max-sm:text-[16px] max-sm:leading-[19.2px]">
-                    +
-                  </span>
-                </div>
-                <div className="w-4 h-3.5 bg-customGreySeventeen my-auto absolute left-8 top-3.5 max-sm:hidden"></div>
-                <div className="px-4 bg-customGreySeventeen rounded-[100px] flex items-center justify-center max-sm:px-0 max-sm:bg-transparent">
-                  <p className="text-customBlackFour text-[16px] leading-[19.2px] max-sm:text-[12px] max-sm:leading-[14.4px]">
-                    {t(
-                      "The basics of working in Forex and Gold market on the MT4 platform"
-                    )}
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
 

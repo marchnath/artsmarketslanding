@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { use, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   validateName,
   validateEmail,
@@ -16,6 +16,10 @@ import {
   checkPhoneExists,
 } from "../../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
+import { useLandingContext } from "./context/context";
+
+// import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Form = ({
   // setFormSubmitted,
@@ -23,11 +27,12 @@ const Form = ({
   // formSubmitted,
   // isActive,
   locale,
+  onFormSubmit,
 }) => {
   const { t } = useTranslation();
 
   const [isActive, setIsActive] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  // const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [inputValueName, setInputValueName] = useState("");
   const [inputValueEmail, setInputValueEmail] = useState("");
@@ -38,6 +43,8 @@ const Form = ({
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [checkboxError, setCheckboxError] = useState("");
   const [defaultCountry, setDefaultCountry] = useState("US");
+
+  const { formSubmitted, setFormSubmitted } = useLandingContext();
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -95,6 +102,12 @@ const Form = ({
     }
   };
 
+  function redirectToWebsite() {
+    setTimeout(() => {
+      window.location.href = "https://www.artsmrkts.com";
+    }, 6000);
+  }
+
   const handleSubmit = async (event) => {
     console.log("see me here");
     event.preventDefault();
@@ -115,12 +128,6 @@ const Form = ({
           setPhoneError("This phone number is already in use.");
           return;
         }
-
-        // await addContactWithBook(
-        //   inputValueName,
-        //   inputValueEmail,
-        //   inputValuePhone
-        // );
 
         const formData = {
           name: inputValueName,
@@ -155,6 +162,10 @@ const Form = ({
         setCheckboxChecked(false);
         setIsActive(true);
         setFormSubmitted(true);
+        // notify();
+
+        redirectToWebsite();
+
         console.log(formSubmitted, "is form submitted?");
       } catch (error) {
         console.error("Error adding contact:", error);
@@ -343,13 +354,35 @@ const Form = ({
                   {t(
                     "I agree to the processing of personal data in accordance with the"
                   )}
+                  <Link
+                    href="https://drive.google.com/file/d/1SaRFtM6Ju29GN-TPSsuWAKxKtUuepSwg/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="text-customRedText underline">
+                      {" "}
+                      {t("Privacy Policy form")}
+                    </span>{" "}
+                  </Link>
+                  {/* <span className="rtl:hidden">and</span> */}
+                  <span>{t("and")}</span>
+                  <Link
+                    href="https://drive.google.com/file/d/1rwdaSoEfJeYzZMUlGKo59BoE1Kgbviri/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    <span className="text-customRedText underline">
+                      {t("Terms and Conditions")}
+                    </span>
+                  </Link>
                   <a
                     href="https://drive.google.com/file/d/1SaRFtM6Ju29GN-TPSsuWAKxKtUuepSwg/view"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="underline text-customRedText active:bg-customOrangeFour"
                   >
-                    {t("Privacy Policy")}
+                    {/* {t("Privacy Policy")} */}
                   </a>
                 </label>
               </div>

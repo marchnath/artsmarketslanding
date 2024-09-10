@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function ClientSideWrapper({ children }) {
   const { t } = useTranslation();
-  const router = useRouter(); // Ensure useRouter is correctly used
+  const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
