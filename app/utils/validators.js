@@ -31,8 +31,10 @@ export const validateEmail = (email) => {
 export const validatePhone = (phone) => {
   if (!phone) {
     return "Phone number is required";
+  } else if (phone.startsWith("+0")) {
+    return "Invalid international phone number format";
   } else if (
-    !/^(\+?\d{1,3}[-.\s]?)?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+    !/^(\+?[1-9]\d{0,2}[-.\s]?)?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
       phone
     )
   ) {

@@ -163,7 +163,10 @@ const Form = ({
               .querySelector(sectionId)
               .scrollIntoView({ behavior: "smooth" });
           } else {
-            // Handle error (e.g., display an error message)
+            alert("Email or phone number already exists");
+            setEmailError(true);
+            setPhoneError(true);
+            return;
           }
         } catch (error) {
           console.error("An error occurred:", error);
@@ -191,17 +194,18 @@ const Form = ({
           console.error("An error occurred:", error);
         }
 
-        setInputValueName("");
-        setInputValueEmail("");
-        setInputValuePhone("");
-        setNameError("");
-        setEmailError("");
-        setPhoneError("");
-        setCheckboxChecked(false);
-        // setIsActive(true);
-        setFormSubmitted(true);
-        setSectionID(sectionId);
-        // notify();
+        if (!emailError) {
+          console.log("emailError", emailError);
+          setInputValueName("");
+          setInputValueEmail("");
+          setInputValuePhone("");
+          setNameError("");
+          setEmailError("");
+          setPhoneError("");
+          setCheckboxChecked(false);
+          setFormSubmitted(true);
+          setSectionID(sectionId);
+        }
 
         console.log(formSubmitted, "is form submitted?");
       } catch (error) {
