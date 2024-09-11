@@ -9,6 +9,12 @@ export async function POST(request) {
     // Unisender API endpoint for sending a single email
     const unisenderApiUrl = "https://api.unisender.com/en/api/sendEmail";
 
+    // Determine the attachment based on the local value
+    const attachmentUrl =
+      local === "ar"
+        ? "https://ebook.artsmrkts.com/arstmkrts_strategy_ar.pdf"
+        : "https://ebook.artsmrkts.com/arstmkrts_strategy_en.pdf";
+
     // Prepare the request payload
     const payload = {
       format: "json",
@@ -18,14 +24,20 @@ export async function POST(request) {
       sender_email: process.env.SENDER_EMAIL,
       subject: `Welcome to Artsmrkts, ${name}!`,
       body: `
-          Hi ${name},
-      
+          Hi ${name}, Grab  your free copy of the Artsmrkts Strategy Guide. 
       
       
           Best regards,
           The Artsmrkts Team
         `,
       list_id: 1, //process.env.UNISENDER_LIST_ID, // Add this line
+      attachments: [
+        {
+          type: "url",
+          url: attachmentUrl,
+          name: `arstmkrts_strategy_${local}.pdf`,
+        },
+      ],
     };
 
     // Send email using Unisender API
