@@ -150,6 +150,7 @@ const Form = ({
           name: inputValueName,
           email: inputValueEmail,
           phone_number: inputValuePhone,
+          locale: locale,
         };
 
         try {
@@ -220,6 +221,8 @@ const Form = ({
       }
     } else if (!checkboxChecked) {
       setCheckboxError("You must agree to the processing of personal data.");
+    } else {
+      setLoading(false);
     }
   };
 
