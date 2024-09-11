@@ -17,6 +17,7 @@ import {
 } from "../../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
 import { useLandingContext } from "./context/context";
+import { CgSpinner } from "react-icons/cg";
 
 // import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -46,6 +47,7 @@ const Form = ({
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const { formSubmitted, setFormSubmitted, setSectionID } = useLandingContext();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -121,6 +123,7 @@ const Form = ({
   };
 
   const handleSubmit = async (event) => {
+    setLoading(true);
     console.log("see me here");
     event.preventDefault();
     setNameError(validateName(inputValueName));
@@ -132,12 +135,14 @@ const Form = ({
         const emailExists = await checkEmailExists(inputValueEmail);
         if (emailExists) {
           setEmailError("This email is already in use.");
+          setLoading(false);
           return;
         }
 
         const phoneExists = await checkPhoneExists(inputValuePhone);
         if (phoneExists) {
           setPhoneError("This phone number is already in use.");
+          setLoading(false);
           return;
         }
 
@@ -166,10 +171,25 @@ const Form = ({
             alert("Email or phone number already exists");
             setEmailError(true);
             setPhoneError(true);
+            setLoading(false);
             return;
           }
         } catch (error) {
           console.error("An error occurred:", error);
+        }
+
+        if (!emailError) {
+          setLoading(false);
+          console.log("emailError", emailError);
+          setInputValueName("");
+          setInputValueEmail("");
+          setInputValuePhone("");
+          setNameError("");
+          setEmailError("");
+          setPhoneError("");
+          setCheckboxChecked(false);
+          setFormSubmitted(true);
+          setSectionID(sectionId);
         }
 
         try {
@@ -192,19 +212,6 @@ const Form = ({
           }
         } catch (error) {
           console.error("An error occurred:", error);
-        }
-
-        if (!emailError) {
-          console.log("emailError", emailError);
-          setInputValueName("");
-          setInputValueEmail("");
-          setInputValuePhone("");
-          setNameError("");
-          setEmailError("");
-          setPhoneError("");
-          setCheckboxChecked(false);
-          setFormSubmitted(true);
-          setSectionID(sectionId);
         }
 
         console.log(formSubmitted, "is form submitted?");
@@ -240,10 +247,14 @@ const Form = ({
         <div>
           {" "}
           <button
+            disabled={loading}
             type="submit"
             className={`${"bg-customOrangeTwo z-50 mb-6  duration-300 w-full ease-in-out hover:bg-customOrange active:bg-customOrangeThree"} flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
             onClick={redirectToWebsite}
           >
+            {loading && (
+              <CgSpinner className="animate-spin text-2xl sm:text-3xl text-white" />
+            )}
             <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px] whitespace-nowrap">
               {t("Get the book")}
             </span>
@@ -456,12 +467,16 @@ const Form = ({
       {!formSubmitted && (
         <button
           // type="submit"
+          disabled={loading}
           className={`${"bg-customOrangeTwo transition-colors duration-300 ease-in-out hover:bg-customOrange active:bg-customOrangeThree"} flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
           onClick={() => {
             ym(98279723, "reachGoal", "form");
             return true;
           }}
         >
+          {loading && (
+            <CgSpinner className="animate-spin text-2xl sm:text-3xl text-white" />
+          )}
           <span className="text-[20px] font-semibold leading-[24px] text-white max-sm:text-[16px] max-sm:leading-[19.2px] whitespace-nowrap">
             {t("Get the book")}
           </span>

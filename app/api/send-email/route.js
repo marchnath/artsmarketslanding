@@ -4,7 +4,7 @@ import axios from "axios";
 
 export async function POST(request) {
   try {
-    const { name, email } = await request.json();
+    const { name, email, local } = await request.json();
 
     // Unisender API endpoint for sending a single email
     const unisenderApiUrl = "https://api.unisender.com/en/api/sendEmail";
@@ -20,11 +20,7 @@ export async function POST(request) {
       body: `
           Hi ${name},
       
-          Thank you for joining Artsmrkts! We're excited to have you on board.
       
-          At Artsmrkts, we strive to bring you the best experience in the arts and markets community. Stay tuned for updates, events, and exclusive offers.
-      
-          If you have any questions or need assistance, feel free to reach out to us at any time.
       
           Best regards,
           The Artsmrkts Team
