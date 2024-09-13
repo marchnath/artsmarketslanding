@@ -5,6 +5,7 @@ import Image from "next/image";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useState, useEffect } from "react";
+// import { isValidPhoneNumber } from "react-phone-number-input";
 import {
   validateName,
   validateEmail,
@@ -122,13 +123,27 @@ const Form = ({
     window.open(bookLink, "_blank");
   };
 
+  // const [isPhoneValid, setIsPhoneValid] = useState(inputValuePhone);
+
   const handleSubmit = async (event) => {
+    // const validPhone = isValidPhoneNumber(inputValuePhone);
+    // console.log("validPhone", validPhone);
+    // setIsPhoneValid(validPhone);
+
     setLoading(true);
     console.log("see me here");
     event.preventDefault();
     setNameError(validateName(inputValueName));
     setEmailError(validateEmail(inputValueEmail));
     setPhoneError(validatePhone(inputValuePhone));
+
+    // if (isPhoneValid) {
+    //   setPhoneError("");
+    // } else if (!isPhoneValid) {
+    //   setPhoneError("Invalid phone number");
+    //   setPhoneError(validatePhone(inputValuePhone));
+    //   setLoading(false);
+    // }
 
     if (!nameError && !emailError && !phoneError && checkboxChecked) {
       try {
@@ -224,6 +239,7 @@ const Form = ({
     } else {
       setLoading(false);
     }
+    trackFormSubmit();
   };
 
   useEffect(() => {
@@ -236,16 +252,18 @@ const Form = ({
     }
   }, [window.ym]);
 
+  const trackFormSubmit = () => {
+    // Ensure the ym function is available
+    if (typeof ym === "undefined") {
+      console.error("Yandex.Metrika is not loaded");
+    } else {
+      // Track the form submission event
+      ym(98279723, "reachGoal", "form");
+    }
+  };
+
   return (
-    <form
-      className="flex flex-col gap-2 relative z-20"
-      name="form-call"
-      onSubmit={(e) => {
-        e.preventDefault(); // Prevent the default form submission behavior
-        ym(98279723, "reachGoal", "form");
-        handleSubmit(e); // Handle the form submission
-      }}
-    >
+    <form className="flex flex-col gap-2 relative z-20" name="form-call">
       {formSubmitted && (
         <div>
           {" "}
@@ -469,13 +487,10 @@ const Form = ({
       )}
       {!formSubmitted && (
         <button
-          // type="submit"
+          type="submit"
           disabled={loading}
           className={`${"bg-customOrangeTwo transition-colors duration-300 ease-in-out hover:bg-customOrange active:bg-customOrangeThree"} flex cursor-pointer items-center gap-2 justify-center rounded-[44px] px-[44px] py-3`}
-          onClick={() => {
-            ym(98279723, "reachGoal", "form");
-            return true;
-          }}
+          onClick={handleSubmit}
         >
           {loading && (
             <CgSpinner className="animate-spin text-2xl sm:text-3xl text-white" />

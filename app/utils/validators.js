@@ -1,3 +1,6 @@
+import validator from "validator";
+import { isValidPhoneNumber } from "react-phone-number-input";
+
 export const validateName = (name) => {
   const namePattern = /^[\p{L}\s\-']+$/u; // Updated regex to allow any Unicode letters
   if (name.length < 1) {
@@ -14,14 +17,13 @@ export const validateName = (name) => {
 };
 
 export const validateEmail = (email) => {
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!email) {
     return "Email is required";
   } else if (email.length < 4) {
     return "Minimum length is 4 characters";
   } else if (email.length > 50) {
     return "Maximum length is 50 characters";
-  } else if (!emailPattern.test(email)) {
+  } else if (!validator.isEmail(email)) {
     return "Invalid email address";
   } else {
     return "";
@@ -31,13 +33,7 @@ export const validateEmail = (email) => {
 export const validatePhone = (phone) => {
   if (!phone) {
     return "Phone number is required";
-  } else if (phone.startsWith("+0")) {
-    return "Invalid international phone number format";
-  } else if (
-    !/^(\+?[1-9]\d{0,2}[-.\s]?)?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-      phone
-    )
-  ) {
+  } else if (!isValidPhoneNumber(phone)) {
     return "Invalid phone number format";
   } else {
     return "";
