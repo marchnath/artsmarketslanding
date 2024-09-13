@@ -167,6 +167,18 @@ const Form = ({
           phone_number: inputValuePhone,
           locale: locale,
         };
+        try {
+          const response = await fetch("/api/bot", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+          console.log(formData, "formData");
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
 
         try {
           const response = await fetch("/api/sendMessage", {
@@ -207,6 +219,19 @@ const Form = ({
           setFormSubmitted(true);
           trackFormSubmit();
           setSectionID(sectionId);
+        }
+
+        try {
+          const response = await fetch("/api/bot", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+          console.log(formData, "formData");
+        } catch (error) {
+          console.error("An error occurred:", error);
         }
 
         try {
