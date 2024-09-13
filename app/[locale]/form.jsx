@@ -205,6 +205,7 @@ const Form = ({
           setPhoneError("");
           setCheckboxChecked(false);
           setFormSubmitted(true);
+          trackFormSubmit();
           setSectionID(sectionId);
         }
 
@@ -239,7 +240,6 @@ const Form = ({
     } else {
       setLoading(false);
     }
-    trackFormSubmit();
   };
 
   useEffect(() => {
