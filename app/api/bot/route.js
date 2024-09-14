@@ -8,7 +8,6 @@ const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, {
 export async function POST(req) {
   try {
     const body = await req.json();
-    console.log("Received a POST request", body);
 
     const { name, email, phone_number } = body;
     await sendWelcomeMessage(name, email, phone_number);
@@ -22,12 +21,24 @@ export async function POST(req) {
     );
   }
 }
-
 async function sendWelcomeMessage(name, email, phone) {
   const lead = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSource: 'Artsmrkts landing page'`;
+  const chatIds = [
+    process.env.TELEGRAM_CHAT_ID_TWO,
+    // process.env.TELEGRAM_CHAT_ID_THREE,
+    // process.env.TELEGRAM_CHAT_ID_ONE,
+  ]; // Ensure you have these environment variables set
 
   try {
-    await bot.sendMessage(lead);
+    for (const chatId of chatIds) {
+      if (!chatId) {
+        console.error("Chat ID is undefined or null");
+        continue;
+      }
+      console.log(`Sending message to chat ID: ${chatId}`);
+      await bot.sendMessage(chatId, lead);
+      console.log(`Message sent to chat ID: ${chatId}`);
+    }
   } catch (error) {
     console.error("Error sending welcome message:", error);
   }
